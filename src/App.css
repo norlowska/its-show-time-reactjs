@@ -1,32 +1,71 @@
 .App {
-  text-align: center;
+    background-color: #1b2b34;
+    color: white;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+a, a:hover {
+    text-decoration: none;
+    color: white;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+a:hover {
+    color:#f44336;
 }
 
-.App-link {
-  color: #61dafb;
+input {
+    color: #222;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.custom-form  {
+    margin: 50px;
+    padding: 40px;
+    background-color: #222;
+    border: 1px solid #111;
+    border-radius: 4px;
+}
+
+.custom-form .row {
+    margin-bottom:25px;
+}
+
+.searchbar, .navbar {
+    background-color: #222;
+}
+
+.searchbar h1, .searchbar a {
+    color: #f44336;
+}
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
+.watchlist {
+    height: 400px;
+}
+
+.footer {
+    text-align: center;
+    padding: 15px;
+}
+
+.button {
+    background: #222 !important;
+    border: 1px solid #f44336 !important;
+    border-radius: 4px;
+    color: white;
+    text-shadow: none;
+}
+
+.button:hover, .button:focus, .button:active {
+    background:  #f44336 !important;
+    border: 1px solid #f44336;
+    border-radius: 4px;
+    color:#111 !important;
+}
+
+.signup-link a {
+    font-weight: 600;
+    color: #f44336;
 }

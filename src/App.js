@@ -1,26 +1,54 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Grid } from 'react-bootstrap';
+import Header from './components/Header';
+import NowPlaying from './components/NowPlaying';
+import SignIn from './components/SignIn';
+import SignUp from './components/SingUp';
+import PasswordForget from './components/PasswordForget';
+import UserFilms from './components/UserFilms';
+import SearchBar from './components/SearchBar';
+import UserProfile from './components/UserProfile';
+import Footer from './components/Footer'
+import * as ROUTES from './constants/routes';
+import { auth } from './firebase/firebase';
 import './App.css';
 
+
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      authUser: null
+    }
+  }
+
+  componentDidMount() {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        this.setState({ authUser });
+      }  else {
+        this.setState({ authUser: null });
+      }
+    });
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router>
+        <Grid fluid className="App">
+          <SearchBar />
+          <Header authUser={this.state.authUser} />
+          <Route exact path={ROUTES.HOME} component={NowPlaying} />
+          <Route path={ROUTES.SIGN_IN} component={SignIn} />
+          <Route path={ROUTES.SIGN_UP} component={SignUp} />
+          <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
+          <Route path={ROUTES.USER} component={UserProfile} />
+          <Route path={ROUTES.USER_WATCHLIST} component={UserFilms} />
+          <Footer></Footer>
+        </Grid>
+
+      </Router>
     );
   }
 }
