@@ -24,4 +24,9 @@ var config = {
     auth.signOut();
   }
 
-  export { auth };
+  const db = firebase.database();
+
+  db.user = uid => db.ref(`users/${uid}`);
+  db.users = () => db.ref('users');
+
+  export { auth, db };

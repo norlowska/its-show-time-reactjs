@@ -25,7 +25,7 @@ class SignUp extends Component {
         } else {
             auth.signup(email, passwordone)
                 .then(function (success) {
-                    t.setState({ success: true });
+                    t.setState({ success: true, email: '', passwordone: '', passwordtwo: '' });
                 })
                 .catch(function (error) {
                     var errorCode = error.code;
@@ -63,7 +63,7 @@ class SignUp extends Component {
     render() {
         return (
             <Row>
-                <Col md={7} className="col-centered">
+                <Col md={7} className="col-centered custom-form">
                 {this.state.success ? (<Alert bsStyle="success" className="success-signup">
                 <h4>Hooray! Your account was successfully created! <a href={SIGN_IN}>Sign in</a></h4></Alert>) : ""}
                     <CustomForm fields={[

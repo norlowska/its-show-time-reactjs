@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { Grid } from 'react-bootstrap';
 import Header from './components/Header';
 import NowPlaying from './components/NowPlaying';
 import SignIn from './components/SignIn';
 import SignUp from './components/SingUp';
 import PasswordForget from './components/PasswordForget';
-import UserFilms from './components/UserFilms';
+import UserMovies from './components/UserMovies';
 import SearchBar from './components/SearchBar';
 import UserProfile from './components/UserProfile';
 import Footer from './components/Footer'
@@ -15,6 +15,16 @@ import { auth } from './firebase/firebase';
 import './App.css';
 import { Provider } from 'react-redux';
 import store from './store';
+
+function PrivateRoute({ component: Component, authUser, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={(props) => (authUser !== null) ? <Component {...props} />
+        : <Redirect to={{ pathname: '/signin' }} />}
+    />
+  )
+}
 
 class App extends Component {
   constructor() {
@@ -27,7 +37,7 @@ class App extends Component {
   componentDidMount() {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        this.setState({ authUser });
+        this.setState({ authUser }, () => console.log(authUser.uid));
       } else {
         this.setState({ authUser: null });
       }
@@ -45,11 +55,10 @@ class App extends Component {
             <Route path={ROUTES.SIGN_IN} component={SignIn} />
             <Route path={ROUTES.SIGN_UP} component={SignUp} />
             <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
-            <Route path={ROUTES.USER} component={UserProfile} />
-            <Route path={ROUTES.USER_WATCHLIST} component={UserFilms} />
+            <PrivateRoute authUser={this.state.authUser} path={ROUTES.USER} component={UserProfile} />
+            <PrivateRoute authUser={this.state.authUser} path={ROUTES.USER_MOVIES} component={UserMovies} />
             <Footer></Footer>
           </Grid>
-
         </Router>
       </Provider>
     );
