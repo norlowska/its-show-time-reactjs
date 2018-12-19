@@ -13,8 +13,6 @@ import Footer from './components/Footer'
 import * as ROUTES from './constants/routes';
 import { auth } from './firebase/firebase';
 import './App.css';
-import { Provider } from 'react-redux';
-import store from './store';
 
 function PrivateRoute({ component: Component, authUser, ...rest }) {
   return (
@@ -46,7 +44,6 @@ class App extends Component {
 
   render() {
     return (
-      <Provider store={store}>
         <Router>
           <Grid fluid className="App">
             <SearchBar />
@@ -60,7 +57,6 @@ class App extends Component {
             <Footer></Footer>
           </Grid>
         </Router>
-      </Provider>
     );
   }
 }

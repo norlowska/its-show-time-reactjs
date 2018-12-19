@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import { Row } from 'react-bootstrap';
 import { fetchNowPlaying } from '../actions/FetchMovies';
 
@@ -15,19 +14,20 @@ class NowPlaying extends Component {
     }
 
     render() {
-        if (!this.props.movies) {
-            return (<div>Ojej</div>);
+        const movies = this.props.movies;
+        if (!movies) {
+            return (<div></div>);
         }
-        console.log(this.props.movies);
-        const movieItems = _.map(this.props.movies, movie => {
+        console.log(movies);
+        const movieItems = movies.map(movie => {
             return (
-                <li className="list-group-item">
+                <li className="list-group-item" key={movie.id}>
                     {movie.title}
                 </li>
             );
         });
         return (
-            <ul className="list-group">
+            <ul className="list-group np-list">
                 {movieItems}
             </ul>
         )

@@ -4,7 +4,7 @@ import _ from 'lodash';
 export default function (state = [], action) {
   switch(action.type) {
     case FETCH_NOWPLAYING:
-        return action.payload.data.results.slice(0,9);
+        return action.payload.data.results.slice(0,10);
     case FETCH_MOVIES:
       return action.payload.data.results.slice(0,9);
     case FETCH_MOVIE:
