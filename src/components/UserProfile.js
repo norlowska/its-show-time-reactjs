@@ -6,7 +6,7 @@ class UserProfile extends Component {
         this.state = {  }
     }
     render() { 
-        return ( <p>User id: {this.props.match.params.id}</p> );
+        return ( <p>User id: {this.props.authUser}</p> );
     }
 }
  
