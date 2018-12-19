@@ -73,3 +73,8 @@ input {
 .np-list {
     color: #222;
 }
+
+.search-form {
+    margin-top: 20px;
+    margin-bottom:10px;
+}

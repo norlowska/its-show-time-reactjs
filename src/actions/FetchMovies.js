@@ -33,7 +33,6 @@ export function fetchCredits(movie_id) {
 
 export function fetchNowPlaying() {
   const request = axios.get(`${URL_NP}`);
-  console.log("SIUP");
   return {
     type: FETCH_NOWPLAYING,
     payload: request

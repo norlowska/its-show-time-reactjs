@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import {Row} from 'react-bootstrap';
+import { auth } from 'firebase';
 
 class UserMovies extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = { }
     }
+
+    componentDidMount() {
+
+    }
+    ///*<MoviesList></MoviesList>*/
     render() { 
-        return ( <Row></Row> );
+        return (  <div></div> );
     }
 }
  

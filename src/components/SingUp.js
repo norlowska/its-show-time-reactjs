@@ -23,33 +23,8 @@ class SignUp extends Component {
             !(passwordone === passwordtwo) || !(email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i))) {
             alert("Wrong registration data. All fields are required. Password and password confirmation must be the same")
         } else {
-            auth.signup(email, passwordone)
-                .then(function (success) {
-                    t.setState({ success: true, email: '', passwordone: '', passwordtwo: '' });
-                })
-                .catch(function (error) {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-
-                    switch (errorCode) {
-                        case 'auth/email-already-in-use':
-                            alert('Account with given email address already exists');
-                            break;
-                        case 'auth/invalid-email':
-                            alert('Invalid email address.');
-                            break;
-                        case 'auth/operation-not-allowed':
-                            alert('Operation not allowed');
-                            break;
-                        case 'auth/weak-password':
-                            alert('The password is too weak.');
-                            break;
-                        default:
-                            alert(errorMessage);
-                    }
-                    console.log(error);
-                });
-
+            auth.signup(email, passwordone);
+            t.setState({ success: true, email: '', passwordone: '', passwordtwo: '' });
         }
 
     }

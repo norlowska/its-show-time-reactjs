@@ -18,7 +18,6 @@ class NowPlaying extends Component {
         if (!movies) {
             return (<div></div>);
         }
-        console.log(movies);
         const movieItems = movies.map(movie => {
             return (
                 <li className="list-group-item" key={movie.id}>

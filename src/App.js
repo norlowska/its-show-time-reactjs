@@ -8,11 +8,11 @@ import SignUp from './components/SingUp';
 import PasswordForget from './components/PasswordForget';
 import UserMovies from './components/UserMovies';
 import SearchBar from './components/SearchBar';
-import UserProfile from './components/UserProfile';
 import Footer from './components/Footer'
 import * as ROUTES from './constants/routes';
 import { auth } from './firebase/firebase';
 import './App.css';
+import SearchResults from './components/SearchResults';
 
 function PrivateRoute({ component: Component, authUser, ...rest }) {
   return (
@@ -49,10 +49,10 @@ class App extends Component {
             <SearchBar />
             <Header authUser={this.state.authUser} />
             <Route exact path={ROUTES.HOME} component={NowPlaying} />
+            <Route path={ROUTES.SEARCH} component={SearchResults} />
             <Route path={ROUTES.SIGN_IN} component={SignIn} />
             <Route path={ROUTES.SIGN_UP} component={SignUp} />
             <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
-            <PrivateRoute authUser={this.state.authUser} path={ROUTES.USER} component={UserProfile} />
             <PrivateRoute authUser={this.state.authUser} path={ROUTES.USER_MOVIES} component={UserMovies} />
             <Footer></Footer>
           </Grid>

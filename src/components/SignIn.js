@@ -19,32 +19,8 @@ class SignIn extends Component {
         event.preventDefault();
         let t = this;
         const { email, password } = this.state;
-        auth.signInWithEmailAndPassword(email, password)
-            .then(function (success) {
-                t.setState({success: true, email: '', password: ''});
-            })
-            .catch(function (error) {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                switch (errorCode) {
-                    case 'auth/user-disabled':
-                        alert('Your account is disabled.');
-                        break;
-                    case 'auth/invalid-email':
-                        alert('Invalid email address.');
-                        break;
-                    case 'auth/user-not-found':
-                        alert('Account with given email address not found.');
-                        break;
-                    case 'auth/wrong-password':
-                        alert('Wrong password.');
-                        break;
-                    default:
-                        alert(errorMessage);
-                }
-                console.log(error);
-            });
-
+        auth.signin(email, password);
+        t.setState({success: true, email: '', password: ''});
     }
 
     onChange = (values) => {

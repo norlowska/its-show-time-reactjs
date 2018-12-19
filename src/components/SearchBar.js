@@ -1,47 +1,25 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Row, Col, Form, FormGroup } from 'react-bootstrap';
-import { URL_SEARCH, API_KEY } from '../constants/constants';
-import axios from 'axios';
-import AutoSuggestion from 'react-autosuggest';
+import { Link, withRouter } from 'react-router-dom';
+import { Row, Col, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 class SearchBar extends Component {
     constructor(props) {
         super(props);
-        this.state = { searchResults: [] };
-        this.handleChange = this.handleChange.bind(this);
+        this.state = { query: '' };
     }
 
-    handleChange(event) {
-        let component = this;
-        axios.get(URL_SEARCH + event.target.value + '&' + API_KEY)
-            .then(function (response) {
-                component.setState({ searchResults: response.data.results }, () => { console.log(component.state.searchResults) });
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+    onChange(event) {
+        this.setState({ query: event.target.value });
     }
 
-    getSuggestionValue(suggestion) {
-        return suggestion.title;
-    };
-
-    renderSuggestion(suggestion, { query }) {
-        return (
-            <p>
-               {/* <img className="searchResult-image" src={suggestion.img == null ? logo : URL_IMG + IMG_SIZE_XSMALL + suggestion.img} />*/}
-                <div className="searchResult-text">
-                    <div className="searchResult-name">
-                        {suggestion.title}
-                    </div>
-                    {suggestion.year}
-                </div>
-            </p>
-        )
-    };
-
-
+    onSubmit(event) {
+        event.preventDefault();
+        let path = "/search/" + this.state.query;
+        this.setState({query: ''});
+        this.props.history.push(path);
+    }
 
     render() {
         return (
@@ -49,11 +27,16 @@ class SearchBar extends Component {
                 <Col md={9}>
                     <h1><Link to="/">It's SHOW TIME</Link></h1>
                 </Col>
-                <Col md={3}>
-                    <Form >
-                        <FormGroup>
-                            {/*<AutoSuggestion></AutoSuggestion>*/}
-                        </FormGroup>
+                <Col md={3} className="search-form">
+                    <Form onSubmit={this.onSubmit.bind(this)}>
+                        <Col md={10}>
+                            <FormGroup>
+                                <FormControl type="text" placeholder="Find movie" name="search" value={this.state.query} onChange={this.onChange.bind(this)} />
+                            </FormGroup></Col>
+                        <Col md={2}>
+                            <FormGroup>
+                                <Button type="submit" className="button"><FontAwesomeIcon icon={faSearch}></FontAwesomeIcon></Button>
+                            </FormGroup></Col>
                     </Form>
                 </Col>
 
@@ -63,4 +46,4 @@ class SearchBar extends Component {
     }
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);

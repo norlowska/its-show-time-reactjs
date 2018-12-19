@@ -26,12 +26,9 @@ const HeaderAuth = ({ authUser }) => (
             <Col md={1}>
                 <Link to={USER_MOVIES}>Your movies</Link>
             </Col>
-            <Col md={8}></Col>
+            <Col md={9}></Col>
             <Col md={1}>
                 <Button className="button" onClick={signOut}>Sign out</Button>
-            </Col>
-            <Col md={1}>
-                <Link to="/"><FontAwesomeIcon icon={faUser}></FontAwesomeIcon></Link>
             </Col>
         </div>
     </Row>
@@ -43,12 +40,9 @@ const HeaderNonAuth = () => (
             <Col md={1}>
                 <Link to={HOME}>Home</Link>
             </Col>
-            <Col md={8}></Col>
+            <Col md={10}></Col>
             <Col md={1}>
                 <a href={SIGN_IN}><Button className="button">Sign in</Button></a>
-            </Col>
-            <Col md={1}>
-                <Link to="/"><FontAwesomeIcon icon={faUser}></FontAwesomeIcon></Link>
             </Col>
         </div>
     </Row>
