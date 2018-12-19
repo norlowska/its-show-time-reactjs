@@ -37,7 +37,7 @@ class App extends Component {
   componentDidMount() {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        this.setState({ authUser }, () => console.log(authUser.uid));
+        this.setState({ authUser });
       } else {
         this.setState({ authUser: null });
       }

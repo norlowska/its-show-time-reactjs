@@ -19,11 +19,6 @@ var config = {
   auth.signin = (email, password) =>
     auth.signInWithEmailAndPassword(email, password);
 
-
-  auth.logut = () => {
-    auth.signOut();
-  }
-
   const db = firebase.database();
 
   db.user = uid => db.ref(`users/${uid}`);

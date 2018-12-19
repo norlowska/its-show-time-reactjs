@@ -31,7 +31,7 @@ export function fetchMovies(title) {
     }
   }
 
-export function fetchNowPlaing() {
+export function fetchNowPlaying() {
     const request = axios.get(`${URL_NP}${API_KEY}`);
     return {
         type: FETCH_NOWPLAYING,
