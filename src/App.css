@@ -78,3 +78,21 @@ input {
     margin-top: 20px;
     margin-bottom:10px;
 }
+
+.col-container {
+        display: table; 
+        width: 100%;
+}
+
+.list-col {
+    display: table-cell;
+}
+
+.movie-details {
+    background: rgba(34, 34, 34, 0.5);
+    margin-top: 5px;
+}
+
+.navbar {
+    margin-bottom: 0;
+}

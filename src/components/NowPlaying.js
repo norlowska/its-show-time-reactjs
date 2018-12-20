@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row } from 'react-bootstrap';
 import { fetchNowPlaying } from '../actions/FetchMovies';
+import MoviesList from './MoviesList';
 
 class NowPlaying extends Component {
     constructor(props) {
@@ -15,21 +15,7 @@ class NowPlaying extends Component {
 
     render() {
         const movies = this.props.movies;
-        if (!movies) {
-            return (<div></div>);
-        }
-        const movieItems = movies.map(movie => {
-            return (
-                <li className="list-group-item" key={movie.id}>
-                    {movie.title}
-                </li>
-            );
-        });
-        return (
-            <ul className="list-group np-list">
-                {movieItems}
-            </ul>
-        )
+        return <MoviesList movies={this.props.movies}></MoviesList>;
     }
 };
 

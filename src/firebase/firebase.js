@@ -54,6 +54,7 @@ auth.signup = (email, password) => {
 
 auth.signin = (email, password) => {
   auth.signInWithEmailAndPassword(email, password)
+  .then((success) => console.log(auth.currentUser))
     .catch(function (error) {
       var errorCode = error.code;
       var errorMessage = error.message;

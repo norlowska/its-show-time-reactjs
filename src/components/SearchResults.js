@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Row } from 'react-bootstrap';
+import _ from 'lodash';
+import MoviesList from './MoviesList';
 import { URL_SEARCH, API_KEY } from '../constants/constants';
 import axios from 'axios';
 
@@ -14,12 +15,25 @@ class SearchResults extends Component {
         let t = this;
         axios.get(`${URL_SEARCH}${params.query}&${API_KEY}&include_adult=false`)
             .then(function(success) {
-                t.setState({results: success.data.results}, () => console.log(t.state.results));
+                t.setState({results: success.data.results});
             });
     }
 
+    componentDidUpdate(prevProps) {
+        const { match: { params } } = this.props;
+        let t = this;
+        var prevQuery = prevProps.query;
+        var query = params.query;
+        if(prevQuery !== query) {
+            axios.get(`${URL_SEARCH}${params.query}&${API_KEY}&include_adult=false`)
+            .then(function(success) {
+                t.setState({results: success.data.results});
+            });
+        }
+    }
+
     render() { 
-        return ( <Row></Row> );
+        return ( <MoviesList movies={this.state.results}></MoviesList> );
     }
 }
 

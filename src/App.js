@@ -5,7 +5,6 @@ import Header from './components/Header';
 import NowPlaying from './components/NowPlaying';
 import SignIn from './components/SignIn';
 import SignUp from './components/SingUp';
-import PasswordForget from './components/PasswordForget';
 import UserMovies from './components/UserMovies';
 import SearchBar from './components/SearchBar';
 import Footer from './components/Footer'
@@ -52,7 +51,6 @@ class App extends Component {
             <Route path={ROUTES.SEARCH} component={SearchResults} />
             <Route path={ROUTES.SIGN_IN} component={SignIn} />
             <Route path={ROUTES.SIGN_UP} component={SignUp} />
-            <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
             <PrivateRoute authUser={this.state.authUser} path={ROUTES.USER_MOVIES} component={UserMovies} />
             <Footer></Footer>
           </Grid>
