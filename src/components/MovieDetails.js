@@ -13,7 +13,7 @@ const MovieDetails = ({ movie }) => {
                 </a>
             </Col>
             <Col md={7} className="info-col">
-                <h2 className="title">{movie.original_title}</h2>
+                <h2 className="title">{movie.original_title} ({movie.release_date.substring(0,4)})</h2>
                 <h3>Overview:</h3>
                 <p className="overview">{movie.overview}</p>
             </Col>

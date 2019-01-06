@@ -16,7 +16,7 @@ const store = createStore(
 );
 
 store.subscribe(() => {
-    console.log(store.getState())
+    console.log("STORE", store.getState())
     saveState({
       USER_MOVIES: store.getState().moviesLists.USER_MOVIES.items
     }, USER_MOVIES)

@@ -38,7 +38,7 @@ class MovieButtons extends Component {
     }
 
     render() {
-        const { movie, userMovies } = this.props;
+        const { movie } = this.props;
         if (this.alreadyOnList(movie)) {
             if(typeof this.getRate(movie) !== "undefined"){
                 return (

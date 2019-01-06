@@ -13,7 +13,7 @@ class NowPlaying extends Component {
     render() {
         const { movies, loading, error } = this.props
         if (error) {
-            return <div>Error! {error}</div>
+            return <div>Error!</div>
         }
 
         if (loading) {

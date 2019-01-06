@@ -6,7 +6,6 @@ import MoviesList from './MoviesList'
 import { Row, Col } from 'react-bootstrap'
 
 class UserMovies extends Component {
-
     componentDidMount() {
         this.props.fetchMovies(USER_MOVIES, null)
     }

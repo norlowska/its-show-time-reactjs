@@ -75,7 +75,7 @@ const fetchMoviesFailure = (listType, error) => {
   return {
     type: ERROR_MOVIES,
     listType,
-    error: error.message,
+    error: error,
     movies: []
   }
 }

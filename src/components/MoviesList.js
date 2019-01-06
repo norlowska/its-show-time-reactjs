@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from 'react-bootstrap';
-import { addWatchedMovie, setOrder } from '../actions'
+import { setOrder } from '../actions'
 import { MOVIES_LIST, TITLE_ASC, TITLE_DESC, RELEASE_DATE_ASC, RELEASE_DATE_DESC } from '../constants'
 import { connect } from 'react-redux';
 import MovieDetails from './MovieDetails';
@@ -76,7 +76,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addWatchedMovie: movie => dispatch(addWatchedMovie(movie)),
         setOrder: order => dispatch(setOrder(order))
     };
 };
