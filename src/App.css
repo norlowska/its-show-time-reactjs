@@ -1,6 +1,7 @@
 .App {
     background-color: #1b2b34;
     color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 a, a:hover {
@@ -16,6 +17,11 @@ input {
     color: #222;
 }
 
+h1, h2, h3 {
+    margin-top: 10px;
+    font-family: 'Josefin Sans', serif;
+}
+
 .custom-form  {
     margin: 50px;
     padding: 40px;
@@ -28,11 +34,11 @@ input {
     margin-bottom:25px;
 }
 
-.searchbar, .navbar {
+.header {
     background-color: #222;
 }
 
-.searchbar h1, .searchbar a {
+.header h1, .header a {
     color: #f44336;
 }
 
@@ -51,11 +57,14 @@ input {
 }
 
 .button {
-    background: #222 !important;
+    background: #f44336 !important;
     border: 1px solid #f44336 !important;
     border-radius: 4px;
     color: white;
     text-shadow: none;
+    text-align: center;
+    margin-right: 15px;
+    margin-left: 15px;
 }
 
 .button:hover, .button:focus, .button:active {
@@ -95,4 +104,38 @@ input {
 
 .navbar {
     margin-bottom: 0;
+}
+
+.poster-col {
+    padding: 20px 18px;
+}
+
+.movie-button {
+    margin: 16px 16px 8px 16px;
+}
+
+.title {
+    color: #f44336;
+    font-weight: 700;
+}
+
+.user-movies-short {
+    height: 520px;
+}
+
+.button-order {
+    width: 120px;
+    margin-bottom: 25px;
+}
+
+.button-last {
+    margin-right: 0;
+}
+
+.background-grey {
+    background: rgba(34, 34, 34, 0.5);
+}
+
+.remove-button {
+    margin-top: 15px;
 }

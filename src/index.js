@@ -5,13 +5,25 @@ import { createStore, applyMiddleware } from 'redux';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import promise from 'redux-promise';
-import reducers from './reducers';
+import rootReducer from './reducers';
+import thunk from 'redux-thunk';
+import { saveState } from './localStorage';
+import { USER_MOVIES } from './constants'
 
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+const store = createStore(
+    rootReducer, 
+    applyMiddleware(thunk)
+);
+
+store.subscribe(() => {
+    console.log(store.getState())
+    saveState({
+      USER_MOVIES: store.getState().moviesLists.USER_MOVIES.items
+    }, USER_MOVIES)
+  })
 
 ReactDOM.render(
-    <Provider store={createStoreWithMiddleware(reducers)}>
+    <Provider store={store}>
         <App />
         </Provider>,
     document.getElementById('root'));

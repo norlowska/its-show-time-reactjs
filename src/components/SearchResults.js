@@ -1,40 +1,58 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
+import { connect } from 'react-redux';
 import MoviesList from './MoviesList';
-import { URL_SEARCH, API_KEY } from '../constants/constants';
-import axios from 'axios';
+import { fetchMovies } from '../actions';
+import { SEARCH_RESULTS } from '../constants'
+import { Row, Col } from 'react-bootstrap'
 
 class SearchResults extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { results: [] }
-    }
 
     componentDidMount() {
-        const { match: { params } } = this.props;
-        let t = this;
-        axios.get(`${URL_SEARCH}${params.query}&${API_KEY}&include_adult=false`)
-            .then(function(success) {
-                t.setState({results: success.data.results});
-            });
+        this.params = new URLSearchParams(this.props.location.search);
+        this.props.fetchMovies(SEARCH_RESULTS,  this.params.get('title'));
     }
 
     componentDidUpdate(prevProps) {
-        const { match: { params } } = this.props;
-        let t = this;
-        var prevQuery = prevProps.query;
-        var query = params.query;
-        if(prevQuery !== query) {
-            axios.get(`${URL_SEARCH}${params.query}&${API_KEY}&include_adult=false`)
-            .then(function(success) {
-                t.setState({results: success.data.results});
-            });
-        }
+        let prevParams = new URLSearchParams(prevProps.location.search);
+        let newParams = new URLSearchParams(this.props.location.search);
+        if (prevParams.get('title') !== newParams.get('title')) {
+            this.params = newParams;
+            this.props.fetchMovies(SEARCH_RESULTS,  newParams.get('title'));
+          }
     }
 
-    render() { 
-        return ( <MoviesList movies={this.state.results}></MoviesList> );
+    render() {
+        const { movies, loading, error } = this.props
+        if (error) {
+            return <div>Error! {error}</div>
+        }
+
+        if (loading) {
+            return <div>Loading...</div>
+        }
+
+        return (
+            <Row>
+                <Col md={8} className="col-centered">
+                    <h1 className="text-center">Search results for: {this.params.get('title')}</h1>
+                    <MoviesList movies={movies} />
+                </Col>
+            </Row>)
     }
 }
+const mapStateToProps = state => {
+    const { listOrder, moviesLists } = state
+    const { isFetching, items, error } = moviesLists.SEARCH_RESULTS || {
+        isFetching: true,
+        items: [],
+        error: null
+    }
+    return {
+        movies: items,
+        loading: isFetching,
+        error: error,
+        listOrder: listOrder
+    };
+};
 
-export default SearchResults;
+export default connect(mapStateToProps, { fetchMovies })(SearchResults);

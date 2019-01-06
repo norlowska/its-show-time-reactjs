@@ -1,25 +1,48 @@
-import React, { Component } from 'react';
-import { auth, db } from 'firebase';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { fetchMovies } from '../actions'
+import { USER_MOVIES } from '../constants'
+import MoviesList from './MoviesList'
+import { Row, Col } from 'react-bootstrap'
 
 class UserMovies extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { }
-    }
 
     componentDidMount() {
-        console.log(auth.currentUser);
-        if(auth.currentUser) {
-            db.user(auth.currentUser.uid)
-            .once("value")
-            .then((snapshot) => {
-                this.setState({currentUser: snapshot.val()});
-              });
-        }
+        this.props.fetchMovies(USER_MOVIES, null)
     }
-    render() { 
-        return (  <div></div> );
+
+    render() {
+        const { movies, loading, error } = this.props
+        if (error) {
+            return <div>Error! {error}</div>
+        }
+
+        if (loading) {
+            return <div>Loading...</div>
+        }
+
+        return (
+        <Row>
+            <Col md={8} className="col-centered">
+                <h1 className="text-center">Your watched movies</h1>
+                <MoviesList movies={movies} />
+            </Col>
+        </Row>)
     }
 }
  
-export default UserMovies;
+const mapStateToProps = state => {
+    const { moviesLists } = state
+    const { isFetching, items, error } = moviesLists.USER_MOVIES || {
+        isFetching: true,
+        items: [],
+        error: null
+    }
+    return {
+        movies: items,
+        loading: isFetching,
+        error: error,
+    };
+};
+
+export default connect(mapStateToProps, { fetchMovies })(UserMovies)
